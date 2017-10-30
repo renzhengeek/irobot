@@ -2,14 +2,16 @@
 
 #set -euE -o pipefail
 
-OBS_DIR=/home/eric/suse/obs/network:ha-clustering:Unstable/lvm2
+OBS_DIR=/home/eric/suse/obs/home:ZRen:Upstream/lvm2
 GIT_DIR=/home/eric/workspace/lvm2
 BRANCH=latest
 
 SOURCE=""
 SIG=""
 
-LOG=$(pwd)/$(basename $0).log
+OLD_PWD=`pwd`
+
+LOG=${OLD_PWD}/$(basename $0).log
 
 API=https://api.opensuse.org
 
@@ -17,11 +19,6 @@ current_version=""
 dm_current_version=""
 latest_version=""
 dm_latest_version=""
-
-which spectool || {
-		log_info "spectool is not installed?"
-		exit 1
-	}
 
 log_info()
 {
